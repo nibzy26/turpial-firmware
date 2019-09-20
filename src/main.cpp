@@ -10,6 +10,7 @@
  */
 
 #include <Arduino.h>
+#include <Wire.h>
 #include "nvs.h"
 #include "nvs_flash.h"
 #include "hal/hardware.h"
