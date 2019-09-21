@@ -16,6 +16,7 @@
 #include "hal/hardware.h"
 #include "NVS/NVStorage.h"
 #include "WiFi/WiFiMode.h"
+#include "BLE/BLETask.h"
 
 /*
 esp_err_t batteryTest() {
@@ -29,7 +30,7 @@ esp_err_t bleTest() {
 }
 */
 
-esp_err_t wifiTest() {
+void wifiTest() {
     // Put the code here for Wi-Fi test
     esp_err_t err;
     WiFiMode wlan;
@@ -94,11 +95,35 @@ void nvsTest() {
         ESP_LOGE(__func__, "Error opening the NVS");
     }
 }
+    void bleTest() {
+    // Put the code here for BLE test
+    esp_err_t err;
+    BLEModule blecheck;
 
+    /**
+   * @brief WAP or WST ifaces enabled on boot?
+   * 
+   */
+    err = blecheck.init();
+    if (err != ESP_OK)
+    {
+        //esp_restart();
+        ESP_LOGE(__func__, "Error starting WiFi modules");
+    }
+    else
+    {
+        
+        ESP_LOGE(__func__, "BLE module is OK");    
+        
+    }
+    
+}  
 void setup()
 {
     //nvsTest();
     wifiTest();
+    bleTest();
+    
 }
 
 void loop()
